@@ -1,4 +1,4 @@
-package uo.ri.cws.application.service.invoice.create.command;
+package uo.ri.cws.application.service.invoice.crud.command;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package uo.ri.cws.application.service.invoice.create;
+package uo.ri.cws.application.service.invoice.crud;
 
 import java.util.List;
 import java.util.Map;
@@ -7,7 +7,8 @@ import java.util.Optional;
 import uo.ri.conf.Factory;
 import uo.ri.cws.application.service.BusinessException;
 import uo.ri.cws.application.service.invoice.InvoicingService;
-import uo.ri.cws.application.service.invoice.create.command.CreateInvoiceFor;
+import uo.ri.cws.application.service.invoice.crud.command.CreateInvoiceFor;
+import uo.ri.cws.application.service.invoice.crud.command.FindInvoice;
 import uo.ri.cws.application.util.command.CommandExecutor;
 
 public class InvoicingServiceImpl implements InvoicingService {
@@ -30,7 +31,7 @@ public class InvoicingServiceImpl implements InvoicingService {
 	@Override
 	public Optional<InvoiceDto> findInvoice(Long number)
 			throws BusinessException {
-		throw new RuntimeException("Not yet implemented");
+		return executor.execute(new FindInvoice(number));
 	}
 
 	@Override
