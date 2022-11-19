@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -30,6 +31,7 @@ public class WorkOrder extends BaseEntity {
 	@Basic(optional = false)
 	private String description;
 	private double amount = 0.0;
+	@Column(name = "STATUS")
 	@Enumerated(EnumType.STRING)
 	private WorkOrderState state = WorkOrderState.OPEN;
 

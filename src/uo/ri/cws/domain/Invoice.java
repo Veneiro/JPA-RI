@@ -18,7 +18,7 @@ import uo.ri.cws.domain.base.BaseEntity;
 import uo.ri.util.math.Round;
 
 @Entity
-@Table(name = "TInvoices")
+@Table(name = "TINVOICES")
 public class Invoice extends BaseEntity {
 	public enum InvoiceState {
 		NOT_YET_PAID, PAID
@@ -31,6 +31,7 @@ public class Invoice extends BaseEntity {
 	private LocalDate date;
 	private double amount;
 	private double vat;
+	@Column(name = "STATUS")
 	@Enumerated(EnumType.STRING)
 	private InvoiceState state = InvoiceState.NOT_YET_PAID;
 

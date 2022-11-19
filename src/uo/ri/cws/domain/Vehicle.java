@@ -14,11 +14,12 @@ import uo.ri.cws.domain.base.BaseEntity;
 import uo.ri.util.assertion.ArgumentChecks;
 
 @Entity
-@Table(name = "TVehicles")
+@Table(name = "TVEHICLES")
 public class Vehicle extends BaseEntity {
 	@Column(unique = true)
 	private String plateNumber;
 	@Basic(optional = false)
+	@Column(name = "BRAND")
 	private String make;
 	@Basic(optional = false)
 	private String model;
