@@ -14,7 +14,7 @@ import uo.ri.cws.domain.base.BaseEntity;
 import uo.ri.util.assertion.ArgumentChecks;
 
 @Entity
-@Table(name = "TClient")
+@Table(name = "TClients")
 public class Client extends BaseEntity {
 	@Column(unique = true)
 	private String dni;
