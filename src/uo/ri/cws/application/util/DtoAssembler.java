@@ -12,7 +12,7 @@ import uo.ri.cws.application.service.invoice.InvoicingService.PaymentMeanDto;
 import uo.ri.cws.application.service.invoice.InvoicingService.VoucherDto;
 import uo.ri.cws.application.service.mechanic.MechanicCrudService.MechanicDto;
 import uo.ri.cws.application.service.vehicle.VehicleCrudService.VehicleDto;
-import uo.ri.cws.application.service.vehicletype.VehicleTypeCrudService.VehicleTypeDto;
+import uo.ri.cws.application.service.vehicleType.VehicleTypeCrudService.VehicleTypeDto;
 import uo.ri.cws.application.service.workorder.WorkOrderCrudService.WorkOrderDto;
 import uo.ri.cws.domain.Cash;
 import uo.ri.cws.domain.Client;

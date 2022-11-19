@@ -26,6 +26,8 @@ public class Mechanic extends BaseEntity {
 	private Set<WorkOrder> assigned = new HashSet<>();
 	@OneToMany(mappedBy = "mechanic")
 	private Set<Intervention> interventions = new HashSet<>();
+	@OneToMany(mappedBy = "mechanic")
+	private Set<Contract> contracts = new HashSet<>();
 
 	Mechanic() {
 	};
@@ -96,6 +98,10 @@ public class Mechanic extends BaseEntity {
 
 	public void setSurname(String surname2) {
 		this.surname = surname2;
+	}
+
+	Set<Contract> _getContracts() {
+		return contracts;
 	}
 
 }

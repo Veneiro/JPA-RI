@@ -1,7 +1,5 @@
 package uo.ri.cws.application.service.mechanic.crud.command;
 
-import java.util.Optional;
-
 import uo.ri.conf.Factory;
 import uo.ri.cws.application.repository.MechanicRepository;
 import uo.ri.cws.application.service.BusinessException;
@@ -24,13 +22,13 @@ public class AddMechanic implements Command<MechanicDto> {
 
 	@Override
 	public MechanicDto execute() throws BusinessException {
-		Optional<Mechanic> om = repo.findByDni(dto.dni);
-		BusinessChecks.isTrue(om.isEmpty(), "The mechanic already exists");
+		BusinessChecks.isTrue(repo.findByDni(dto.dni).isEmpty(),
+				"The mechanic already exists");
 		BusinessChecks.isNotEmpty(dto.name, "The name is empty");
 		BusinessChecks.isNotEmpty(dto.surname, "The surname is empty");
-		
+
 		Mechanic m = new Mechanic(dto.dni, dto.surname, dto.name);
-		
+
 		repo.add(m);
 
 		return DtoAssembler.toDto(m);

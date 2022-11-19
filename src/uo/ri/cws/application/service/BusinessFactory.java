@@ -3,14 +3,20 @@ package uo.ri.cws.application.service;
 import uo.ri.cws.application.ServiceFactory;
 import uo.ri.cws.application.service.client.ClientCrudService;
 import uo.ri.cws.application.service.client.ClientHistoryService;
+import uo.ri.cws.application.service.contract.ContractService;
+import uo.ri.cws.application.service.contracttype.ContractTypeService;
 import uo.ri.cws.application.service.invoice.InvoicingService;
 import uo.ri.cws.application.service.invoice.crud.InvoicingServiceImpl;
 import uo.ri.cws.application.service.mechanic.MechanicCrudService;
 import uo.ri.cws.application.service.mechanic.crud.MechanicCrudServiceImpl;
+import uo.ri.cws.application.service.payroll.PayrollService;
+import uo.ri.cws.application.service.payroll.crud.PayrollServiceImpl;
+import uo.ri.cws.application.service.professionalgroup.ProfessionalGroupService;
+import uo.ri.cws.application.service.professionalgroup.crud.ProfessionalGroupServiceImpl;
 import uo.ri.cws.application.service.sparepart.SparePartCrudService;
 import uo.ri.cws.application.service.vehicle.VehicleCrudService;
 import uo.ri.cws.application.service.vehicle.crud.VehicleCrudServiceImpl;
-import uo.ri.cws.application.service.vehicletype.VehicleTypeCrudService;
+import uo.ri.cws.application.service.vehicleType.VehicleTypeCrudService;
 import uo.ri.cws.application.service.workorder.CloseWorkOrderService;
 import uo.ri.cws.application.service.workorder.ViewAssignedWorkOrdersService;
 import uo.ri.cws.application.service.workorder.WorkOrderCrudService;
@@ -49,7 +55,7 @@ public class BusinessFactory implements ServiceFactory {
 
 	@Override
 	public ClientCrudService forClienteCrudService() {
-		throw new RuntimeException("Not yet implemented");
+		return null;
 	}
 
 	@Override
@@ -67,4 +73,24 @@ public class BusinessFactory implements ServiceFactory {
 		throw new RuntimeException("Not yet implemented");
 	}
 
+	@Override
+	public ContractService forContractService() {
+		return null;
+	}
+
+	@Override
+	public ContractTypeService forContractTypeService() {
+		return null;
+
+	}
+
+	@Override
+	public PayrollService forPayrollService() {
+		return new PayrollServiceImpl();
+	}
+
+	@Override
+	public ProfessionalGroupService forProfessionalGroupService() {
+		return new ProfessionalGroupServiceImpl();
+	}
 }

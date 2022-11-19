@@ -20,7 +20,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/commonj.sdo-2.1.1.jar"/>
-	<classpathentry kind="lib" path="lib/eclipselink-2.7.7.jar"/>
+	<classpathentry kind="lib" path="lib/eclipselink-2.7.7.jar" sourcepath="/tmp/.org.sf.feeling.decompiler1668768146209/source/eclipselink-2.7.7-sources.jar"/>
 	<classpathentry kind="lib" path="lib/hsqldb-2.2.9.jar"/>
 	<classpathentry kind="lib" path="lib/jakarta.persistence-2.2.3.jar"/>
 	<classpathentry kind="lib" path="lib/javax.persistence-api-2.2.jar"/>

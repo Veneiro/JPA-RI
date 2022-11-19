@@ -147,5 +147,21 @@ public class Associations {
 		}
 
 	}
+	
+	public static class HireFire {
+		
+		public static void hire(Mechanic mechanic, Contract contract) {
+			contract._setMechanic(mechanic);
+			
+			mechanic._getContracts().add(contract);
+		}
+
+		public static void fire(Mechanic mechanic, Contract contract) {
+			mechanic._getContracts().remove(contract);
+			
+			contract._setMechanic(mechanic);
+		}
+		
+	}
 
 }
