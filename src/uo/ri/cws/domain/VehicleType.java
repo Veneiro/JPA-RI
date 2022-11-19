@@ -7,11 +7,13 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import uo.ri.cws.domain.base.BaseEntity;
 import uo.ri.util.assertion.ArgumentChecks;
 
 @Entity
+@Table(name = "TVehicleTypes")
 public class VehicleType extends BaseEntity {
 	// natural attributes
 	@Column(unique = true)
@@ -19,10 +21,12 @@ public class VehicleType extends BaseEntity {
 	private double pricePerHour; // /60*costeporhora
 
 	// accidental attributes
-	@OneToMany (mappedBy = "vehicleType") private Set<Vehicle> vehicles = new HashSet<>();
+	@OneToMany(mappedBy = "vehicleType")
+	private Set<Vehicle> vehicles = new HashSet<>();
 
-	VehicleType(){}
-	
+	VehicleType() {
+	}
+
 	/**
 	 * @param name
 	 */

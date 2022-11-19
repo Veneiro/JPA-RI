@@ -15,7 +15,7 @@ import uo.ri.cws.domain.base.BaseEntity;
 import uo.ri.util.assertion.ArgumentChecks;
 
 @Entity
-@Table(uniqueConstraints = {
+@Table(name = "TInterventions", uniqueConstraints = {
 		@UniqueConstraint(columnNames = { "WORKORDER_ID", "MECHANIC_ID" }) })
 public class Intervention extends BaseEntity {
 	// natural attributes
@@ -124,7 +124,8 @@ public class Intervention extends BaseEntity {
 	}
 
 	public double getAmount() {
-		double pricePerHour = workOrder.getVehicle().getVehicleType().getPricePerHour();
+		double pricePerHour = workOrder.getVehicle().getVehicleType()
+				.getPricePerHour();
 		double pricePerMinute = pricePerHour / 60;
 		double timeAmount = minutes * pricePerMinute;
 		double substitutionAmount = 0.0;

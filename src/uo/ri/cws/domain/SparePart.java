@@ -8,11 +8,13 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import uo.ri.cws.domain.base.BaseEntity;
 import uo.ri.util.assertion.ArgumentChecks;
 
 @Entity
+@Table(name = "TSpareparts")
 public class SparePart extends BaseEntity {
 	// natural attributes
 	@Column(unique = true)

@@ -8,13 +8,15 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import uo.ri.cws.domain.base.BaseEntity;
 import uo.ri.util.assertion.ArgumentChecks;
 
 @Entity
+@Table(name = "TClient")
 public class Client extends BaseEntity {
-	@Column(unique = true)		
+	@Column(unique = true)
 	private String dni;
 	@Basic(optional = false)
 	private String name;
@@ -24,7 +26,7 @@ public class Client extends BaseEntity {
 	private String email;
 	@Basic(optional = false)
 	private String phone;
-	
+
 	private Address address;
 
 	@OneToMany(mappedBy = "client")
@@ -164,7 +166,7 @@ public class Client extends BaseEntity {
 
 	public void setAddress(Address address2) {
 		this.address = address2;
-		
+
 	}
 
 }

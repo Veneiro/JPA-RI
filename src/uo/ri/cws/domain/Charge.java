@@ -7,7 +7,7 @@ import javax.persistence.UniqueConstraint;
 import uo.ri.cws.domain.base.BaseEntity;
 
 @Entity
-@Table(uniqueConstraints = {
+@Table(name = "TCharges", uniqueConstraints = {
 		@UniqueConstraint(columnNames = { "INVOICE_ID", "PAYMENTMEAN_ID" }) })
 public class Charge extends BaseEntity {
 	// natural attributes
@@ -21,8 +21,7 @@ public class Charge extends BaseEntity {
 	}
 
 	public Charge(Invoice invoice, PaymentMean paymentMean, double amount) {
-		
-		
+
 		this.amount = amount;
 		// store the amount
 		// increment the paymentMean accumulated -> paymentMean.pay( amount )

@@ -8,11 +8,13 @@ import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import uo.ri.cws.domain.base.BaseEntity;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "TPaymentMeans")
 public abstract class PaymentMean extends BaseEntity {
 	// natural attributes
 	private double accumulated = 0.0;

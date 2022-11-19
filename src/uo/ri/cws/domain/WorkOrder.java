@@ -7,16 +7,17 @@ import java.util.Set;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import uo.ri.cws.domain.base.BaseEntity;
 import uo.ri.util.assertion.ArgumentChecks;
 
 @Entity
-@Table(uniqueConstraints = {
+@Table(name = "TWorkorders", uniqueConstraints = {
 		@UniqueConstraint(columnNames = { "VEHICLE_ID", "DATE" }) })
 public class WorkOrder extends BaseEntity {
 	public enum WorkOrderState {
@@ -29,7 +30,7 @@ public class WorkOrder extends BaseEntity {
 	@Basic(optional = false)
 	private String description;
 	private double amount = 0.0;
-	@Transient
+	@Enumerated(EnumType.STRING)
 	private WorkOrderState state = WorkOrderState.OPEN;
 
 	// accidental attributes

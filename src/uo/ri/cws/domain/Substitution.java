@@ -10,8 +10,9 @@ import uo.ri.cws.domain.base.BaseEntity;
 import uo.ri.util.assertion.ArgumentChecks;
 
 @Entity
-@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "SPAREPART_ID",
-		"INTERVENTION_ID" }) })
+@Table(name = "TSubstitutions", uniqueConstraints = {
+		@UniqueConstraint(columnNames = { "SPAREPART_ID",
+				"INTERVENTION_ID" }) })
 public class Substitution extends BaseEntity {
 	// natural attributes
 	private int quantity;

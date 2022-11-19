@@ -4,31 +4,34 @@ import java.time.LocalDate;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import uo.ri.cws.domain.base.BaseEntity;
 
 @Entity
+@Table(name = "TContracts")
 public class Contract extends BaseEntity {
-	
+
 	private Mechanic mechanic;
-	
+
 	@Basic(optional = false)
 	private LocalDate startDate;
-	
+
 	private double annualWage;
-	
+
+	@Basic(optional = false)
 	private LocalDate endDate;
-	
+
 	private double settlement;
-	
+
 	private ContractState state;
-	
-	public enum ContractState{
+
+	public enum ContractState {
 		IN_FORCE, TERMINATED
 	}
 
 	public void _setMechanic(Mechanic mechanic2) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

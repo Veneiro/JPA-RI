@@ -11,12 +11,14 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import uo.ri.cws.domain.WorkOrder.WorkOrderState;
 import uo.ri.cws.domain.base.BaseEntity;
 import uo.ri.util.math.Round;
 
 @Entity
+@Table(name = "TInvoices")
 public class Invoice extends BaseEntity {
 	public enum InvoiceState {
 		NOT_YET_PAID, PAID
@@ -44,7 +46,7 @@ public class Invoice extends BaseEntity {
 	public Invoice(Long number) {
 		// call full constructor with sensible defaults
 		this.number = number;
-		if(LocalDate.now().isBefore(LocalDate.of(2012, 7, 1))) {
+		if (LocalDate.now().isBefore(LocalDate.of(2012, 7, 1))) {
 			this.vat = 0.18;
 		} else {
 			this.vat = 0.21;
@@ -56,7 +58,7 @@ public class Invoice extends BaseEntity {
 		// call full constructor with sensible defaults
 		this.number = number;
 		this.date = date;
-		if(date.isBefore(LocalDate.of(2012, 7, 1))) {
+		if (date.isBefore(LocalDate.of(2012, 7, 1))) {
 			this.vat = 0.18;
 		} else {
 			this.vat = 0.21;
@@ -85,7 +87,7 @@ public class Invoice extends BaseEntity {
 		for (int i = 0; i < workOrders.size(); i++) {
 			addWorkOrder(workOrders.get(i));
 		}
-		if(date.isBefore(LocalDate.of(2012, 7, 1))) {
+		if (date.isBefore(LocalDate.of(2012, 7, 1))) {
 			this.vat = 0.18;
 		} else {
 			this.vat = 0.21;
@@ -114,13 +116,13 @@ public class Invoice extends BaseEntity {
 	 * @throws IllegalStateException if the invoice status is not NOT_YET_PAID
 	 */
 	public void addWorkOrder(WorkOrder workOrder) {
-		if(this.state != InvoiceState.NOT_YET_PAID) {
+		if (this.state != InvoiceState.NOT_YET_PAID) {
 			throw new IllegalStateException("Invoice not yet paid");
 		}
-		
+
 		workOrder.setState(WorkOrderState.INVOICED);
 		Associations.ToInvoice.link(this, workOrder);
-		
+
 		computeAmount();
 	}
 
@@ -132,12 +134,12 @@ public class Invoice extends BaseEntity {
 	 * @throws IllegalStateException if the invoice status is not NOT_YET_PAID
 	 */
 	public void removeWorkOrder(WorkOrder workOrder) {
-		if(this.state != InvoiceState.NOT_YET_PAID) {
+		if (this.state != InvoiceState.NOT_YET_PAID) {
 			throw new IllegalStateException("Invoice not yet paid");
 		}
-		
+
 		Associations.ToInvoice.unlink(this, workOrder);
-		
+
 		computeAmount();
 		workOrder.setState(WorkOrderState.FINISHED);
 	}
