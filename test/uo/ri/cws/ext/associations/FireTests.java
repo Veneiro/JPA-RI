@@ -57,6 +57,7 @@ public class FireTests {
 
 	@Test
 	public void testSafeReturn() {
+		mechanic = new Mechanic("dni", "nombre", "apellidos");
 		Set<Contract> contracts = mechanic.getTerminatedContracts();
 		int num = contracts.size();
 

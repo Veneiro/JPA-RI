@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import uo.ri.cws.domain.base.BaseEntity;
@@ -17,6 +18,7 @@ public class ContractType extends BaseEntity {
 	private String name;
 	private double compensationDays;
 
+	@OneToMany(mappedBy = "type")
 	private Set<Contract> contracts = new HashSet<Contract>();
 
 	public ContractType() {
