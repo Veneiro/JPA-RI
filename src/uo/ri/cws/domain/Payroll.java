@@ -36,6 +36,19 @@ public class Payroll extends BaseEntity {
 		this.date = date2;
 	}
 
+	public Payroll(Contract contract2, LocalDate d, double monthlyWage2,
+			double extra, double productivity, double trienniums, double tax,
+			double nic2) {
+		Associations.Run.link(this, contract2);
+		this.date = d;
+		this.monthlyWage = monthlyWage2;
+		this.bonus = extra;
+		this.productivityBonus = productivity;
+		this.trienniumPayment = trienniums;
+		this.incomeTax = tax;
+		this.nic = nic2;
+	}
+
 	public String getContractId() {
 		return contract.getId();
 	}

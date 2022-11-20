@@ -78,6 +78,10 @@ public class WorkOrder extends BaseEntity {
 		this(now, description, vehicle);
 	}
 
+	public WorkOrder(Vehicle v, LocalDateTime atStartOfDay) {
+		this(v, atStartOfDay, "no-description");
+	}
+
 	public void setState(WorkOrderState state) {
 		this.state = state;
 	}
@@ -276,6 +280,14 @@ public class WorkOrder extends BaseEntity {
 			return true;
 		}
 		return false;
+	}
+
+	public void setStatusForTesting(WorkOrderState invoiced) {
+		this.state = invoiced;
+	}
+
+	public void setAmountForTesting(double money) {
+		this.amount = money;
 	}
 
 }

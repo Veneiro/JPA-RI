@@ -108,8 +108,8 @@ public class Contract extends BaseEntity {
 		return annualWage;
 	}
 
-	public LocalDate getEndDate() {
-		return endDate;
+	public Optional<LocalDate> getEndDate() {
+		return Optional.ofNullable(endDate);
 	}
 
 	public double getSettlement() {
@@ -122,6 +122,7 @@ public class Contract extends BaseEntity {
 
 	public void terminate() {
 		this.state = ContractState.TERMINATED;
+		Associations.Fire.link(this);
 	}
 
 	public ProfessionalGroup getProfessionalGroup() {
@@ -138,5 +139,10 @@ public class Contract extends BaseEntity {
 
 	public Set<Payroll> getPayrolls() {
 		return new HashSet<Payroll>(payrolls);
+	}
+
+	public void setStartDate(LocalDate startDate2) {
+		this.startDate = startDate2;
+		
 	}
 }
