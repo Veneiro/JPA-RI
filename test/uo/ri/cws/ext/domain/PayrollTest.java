@@ -28,8 +28,8 @@
 //	private ProfessionalGroup group = new ProfessionalGroup("XI",
 //			trienniumMoney, productivityPercent);
 //	private Mechanic mechanic = new Mechanic("dni", "nombre", "apellidos");
-//	private LocalDate endDate = LocalDate
-//		.now().with(TemporalAdjusters.lastDayOfMonth()), startDate = null;
+//	private LocalDate endDate = LocalDate.now()
+//			.with(TemporalAdjusters.lastDayOfMonth()), startDate = null;
 //	private double monthlyWage = 3650;
 //	private double annualWage = 51100; // salario base anual
 //	private double nic = Math.floor(((annualWage * 0.05) / 12) * 100) / 100;
@@ -38,8 +38,8 @@
 //
 //	@Before
 //	public void setUp() throws Exception {
-//		endDate = LocalDate
-//			.now().plusMonths(6).with(TemporalAdjusters.lastDayOfMonth());
+//		endDate = LocalDate.now().plusMonths(6)
+//				.with(TemporalAdjusters.lastDayOfMonth());
 //
 //		contract = new Contract(mechanic, type, group, endDate, annualWage);
 //	}
@@ -84,8 +84,8 @@
 //
 //	@Test
 //	public void testNovemberNoActivityShortTermContract() {
-//		startDate = LocalDate
-//			.now().minusMonths(7).with(TemporalAdjusters.firstDayOfMonth());
+//		startDate = LocalDate.now().minusMonths(7)
+//				.with(TemporalAdjusters.firstDayOfMonth());
 //		contract.setStartDate(startDate);
 //
 //		Payroll p = new Payroll(contract, november);
@@ -105,8 +105,8 @@
 //
 //	@Test
 //	public void testJuneNoActivityShortTermContract() {
-//		startDate = LocalDate
-//			.now().minusMonths(7).with(TemporalAdjusters.firstDayOfMonth());
+//		startDate = LocalDate.now().minusMonths(7)
+//				.with(TemporalAdjusters.firstDayOfMonth());
 //		contract.setStartDate(startDate);
 //		Payroll p = new Payroll(contract, june);
 //
@@ -125,8 +125,8 @@
 //
 //	@Test
 //	public void testNovemberWithProductivityNoTriennium() {
-//		startDate = LocalDate
-//			.now().minusMonths(7).with(TemporalAdjusters.firstDayOfMonth());
+//		startDate = LocalDate.now().minusMonths(7)
+//				.with(TemporalAdjusters.firstDayOfMonth());
 //		contract.setStartDate(startDate);
 //		double interventions = 365.0;
 //		double productivity = interventions * productivityPercent / 100; // productividad
@@ -149,8 +149,8 @@
 //
 //	@Test
 //	public void testJuneWithProductivityNoTriennium() {
-//		startDate = LocalDate
-//			.now().minusMonths(7).with(TemporalAdjusters.firstDayOfMonth());
+//		startDate = LocalDate.now().minusMonths(7)
+//				.with(TemporalAdjusters.firstDayOfMonth());
 //		contract.setStartDate(startDate);
 //		double interventions = 365.0;
 //		double productivity = interventions * productivityPercent / 100; // productividad
@@ -171,8 +171,8 @@
 //
 //	@Test
 //	public void testNovemberWithProductivityWithTriennium() {
-//		startDate = LocalDate
-//			.now().minusMonths(38).with(TemporalAdjusters.firstDayOfMonth());
+//		startDate = LocalDate.now().minusMonths(38)
+//				.with(TemporalAdjusters.firstDayOfMonth());
 //		contract.setStartDate(startDate);
 //		double interventions = 365.0;
 //		double productivity = interventions * productivityPercent / 100; // productividad
@@ -194,8 +194,8 @@
 //
 //	@Test
 //	public void testJuneWithProductivityWithTriennium() {
-//		startDate = LocalDate
-//			.now().minusMonths(55).with(TemporalAdjusters.firstDayOfMonth());
+//		startDate = LocalDate.now().minusMonths(55)
+//				.with(TemporalAdjusters.firstDayOfMonth());
 //		contract.setStartDate(startDate);
 //		double interventions = 365.0;
 //		double productivity = interventions * productivityPercent / 100; // productividad

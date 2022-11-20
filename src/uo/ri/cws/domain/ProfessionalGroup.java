@@ -1,7 +1,11 @@
 package uo.ri.cws.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import uo.ri.cws.domain.base.BaseEntity;
@@ -15,6 +19,9 @@ public class ProfessionalGroup extends BaseEntity {
 	private double productivityRate;
 	@Column(name = "TRIENNIUMPAYMENT")
 	private double trienniumSalary;
+
+	@OneToMany(mappedBy = "group")
+	private Set<Contract> contracts = new HashSet<Contract>();
 
 	public ProfessionalGroup() {
 	}
@@ -52,6 +59,14 @@ public class ProfessionalGroup extends BaseEntity {
 
 	public double getTrienniumPayment() {
 		return this.trienniumSalary;
+	}
+
+	public Set<Contract> getContracts() {
+		return new HashSet<>(contracts);
+	}
+
+	Set<Contract> _getContracts() {
+		return contracts;
 	}
 
 }

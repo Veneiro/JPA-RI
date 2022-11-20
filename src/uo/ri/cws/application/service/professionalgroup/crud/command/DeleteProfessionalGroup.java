@@ -23,8 +23,9 @@ public class DeleteProfessionalGroup implements Command<Void> {
 
 	@Override
 	public Void execute() throws BusinessException {
-		Optional<ProfessionalGroup> om = repo.findById(profId);
+		Optional<ProfessionalGroup> om = repo.findByName(profId);
 		BusinessChecks.exists(om);
+		BusinessChecks.isTrue(om.get().getContracts().isEmpty());
 		ProfessionalGroup pg = om.get();
 		repo.remove(pg);
 

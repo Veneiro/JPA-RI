@@ -1,5 +1,8 @@
 package uo.ri.cws.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -13,6 +16,8 @@ public class ContractType extends BaseEntity {
 	@Column(unique = true)
 	private String name;
 	private double compensationDays;
+
+	private Set<Contract> contracts = new HashSet<Contract>();
 
 	public ContractType() {
 	}
@@ -28,6 +33,14 @@ public class ContractType extends BaseEntity {
 
 	public double getCompensationDays() {
 		return compensationDays;
+	}
+
+	public Set<Contract> getContracts() {
+		return new HashSet<Contract>(contracts);
+	}
+
+	Set<Contract> _getContracts() {
+		return this.contracts;
 	}
 
 }

@@ -28,16 +28,20 @@ public class Payroll extends BaseEntity {
 	}
 
 	public Payroll(Contract contract2) {
-		this.contract = contract2;
+		Associations.Run.link(this, contract2);
 	}
 
 	public Payroll(Contract contract2, LocalDate date2) {
-		this.contract = contract2;
+		Associations.Run.link(this, contract2);
 		this.date = date2;
 	}
 
 	public String getContractId() {
 		return contract.getId();
+	}
+
+	public void setContract(Contract contract) {
+		this.contract = contract;
 	}
 
 	public Contract getContract() {
@@ -70,6 +74,11 @@ public class Payroll extends BaseEntity {
 
 	public double getTrienniumPayment() {
 		return trienniumPayment;
+	}
+
+	public double getNetWage() {
+		double aux = bonus + monthlyWage + productivityBonus + trienniumPayment;
+		return aux + (aux * incomeTax);
 	}
 
 }

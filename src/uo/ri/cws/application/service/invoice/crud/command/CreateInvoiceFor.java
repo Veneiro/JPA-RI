@@ -22,6 +22,10 @@ public class CreateInvoiceFor implements Command<InvoiceDto> {
 
 	public CreateInvoiceFor(List<String> workOrderIds) {
 		ArgumentChecks.isNotNull(workOrderIds);
+		ArgumentChecks.isFalse(workOrderIds.isEmpty());
+		ArgumentChecks.isFalse(workOrderIds.stream().anyMatch(i -> i == null));
+		ArgumentChecks
+				.isFalse(workOrderIds.stream().anyMatch(i -> i.isBlank()));
 		this.workOrderIds = workOrderIds;
 	}
 
@@ -31,6 +35,7 @@ public class CreateInvoiceFor implements Command<InvoiceDto> {
 		List<WorkOrder> workOrders = wrkrsRepo.findByIds(workOrderIds);
 		checkConditions(workOrders);
 		Invoice i = new Invoice(number, workOrders);
+		invsRepo.add(i);
 		return DtoAssembler.toDto(i);
 	}
 

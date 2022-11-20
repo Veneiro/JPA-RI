@@ -27,7 +27,7 @@ public class DeleteMechanic implements Command<Void> {
 		BusinessChecks.exists(om);
 		Mechanic m = om.get();
 		BusinessChecks.isFalse(m.isInForce());
-		BusinessChecks.isTrue(m._getTerminatedContracts().isEmpty());
+		BusinessChecks.isTrue(m.getTerminatedContracts().isEmpty());
 		BusinessChecks.isTrue(m.getInterventions().size() == 0,
 				"The mechanic already has interventions ");
 		BusinessChecks.isTrue(m.getAssigned().size() == 0,

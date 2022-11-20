@@ -1,7 +1,9 @@
 package uo.ri.cws.domain;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -9,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import uo.ri.cws.domain.base.BaseEntity;
@@ -19,8 +23,9 @@ public class Contract extends BaseEntity {
 
 	private Mechanic mechanic;
 	private Mechanic firedMechanic;
+	@ManyToOne
 	@JoinColumn(name = "PROFESSIONALGROUP_ID")
-	private ProfessionalGroup pg;
+	private ProfessionalGroup group;
 
 	@Basic(optional = false)
 	private LocalDate startDate;
@@ -43,31 +48,39 @@ public class Contract extends BaseEntity {
 		IN_FORCE, TERMINATED
 	}
 
+	@OneToMany(mappedBy = "contract")
+	private Set<Payroll> payrolls = new HashSet<Payroll>();
+
 	public Contract() {
 	}
 
 	public Contract(Mechanic mechanic2, ContractType type,
 			ProfessionalGroup group, double wage) {
-		this.mechanic = mechanic2;
+		Associations.Hire.link(this, mechanic2);
 		this.state = ContractState.IN_FORCE;
-		this.pg = group;
+		Associations.Group.link(this, group);
+		Associations.Type.link(this, type);
 	}
 
 	public Contract(Mechanic mechanic2, ContractType type,
 			ProfessionalGroup group, LocalDate endDate2, double wage) {
-		this.mechanic = mechanic2;
-		this.type = type;
+		Associations.Hire.link(this, mechanic2);
+		Associations.Type.link(this, type);
 		this.annualWage = wage;
 		this.endDate = endDate2;
 		this.state = ContractState.IN_FORCE;
-		this.pg = group;
+		Associations.Group.link(this, group);
+	}
+
+	public void setType(ContractType type) {
+		this.type = type;
 	}
 
 	public void setMechanic(Mechanic optional) {
 		this.mechanic = optional;
 	}
 
-	public void setFiredMechanic(Mechanic mechanic2) {
+	public void _setFiredMechanic(Mechanic mechanic2) {
 		this.firedMechanic = mechanic2;
 	}
 
@@ -80,11 +93,11 @@ public class Contract extends BaseEntity {
 	}
 
 	public Optional<Mechanic> getMechanic() {
-		return Optional.of(this.mechanic);
+		return Optional.ofNullable(this.mechanic);
 	}
 
 	public Optional<Mechanic> getFiredMechanic() {
-		return Optional.of(this.firedMechanic);
+		return Optional.ofNullable(this.firedMechanic);
 	}
 
 	public LocalDate getStartDate() {
@@ -112,6 +125,18 @@ public class Contract extends BaseEntity {
 	}
 
 	public ProfessionalGroup getProfessionalGroup() {
-		return this.pg;
+		return this.group;
+	}
+
+	public void setProfessionalGroup(ProfessionalGroup pg) {
+		this.group = pg;
+	}
+
+	Set<Payroll> _getPayrolls() {
+		return payrolls;
+	}
+
+	public Set<Payroll> getPayrolls() {
+		return new HashSet<Payroll>(payrolls);
 	}
 }
