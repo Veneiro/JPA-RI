@@ -13,4 +13,21 @@ public class ContractType extends BaseEntity {
 	@Column(unique = true)
 	private String name;
 	private double compensationDays;
+
+	public ContractType() {
+	}
+
+	public ContractType(String name, double compensationDays) {
+		this.name = name;
+		this.compensationDays = compensationDays;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public double getCompensationDays() {
+		return compensationDays;
+	}
+
 }

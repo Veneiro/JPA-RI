@@ -28,7 +28,7 @@ public class Invoice extends BaseEntity {
 	@Column(unique = true)
 	private Long number;
 	@Basic(optional = false)
-	private LocalDate date;
+	private LocalDate date = LocalDate.now();
 	private double amount;
 	private double vat;
 	@Column(name = "STATUS")

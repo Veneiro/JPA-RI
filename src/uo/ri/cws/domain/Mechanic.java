@@ -1,6 +1,7 @@
 package uo.ri.cws.domain;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.persistence.Basic;
@@ -9,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import uo.ri.cws.domain.Contract.ContractState;
 import uo.ri.cws.domain.base.BaseEntity;
 import uo.ri.util.assertion.ArgumentChecks;
 
@@ -55,6 +57,16 @@ public class Mechanic extends BaseEntity {
 		this.dni = dni;
 		this.surname = surname;
 		this.name = name;
+	}
+
+	public void addContract(Contract contract) {
+		contract.setState(ContractState.IN_FORCE);
+		Associations.Hire.link(contract, this);
+	}
+
+	public void removeContract(Contract contract) {
+		Associations.Hire.unlink(contract, this);
+		contract.setState(ContractState.TERMINATED);
 	}
 
 	/**
@@ -104,6 +116,33 @@ public class Mechanic extends BaseEntity {
 
 	Set<Contract> _getContracts() {
 		return contracts;
+	}
+
+	public Set<Contract> _getTerminatedContracts() {
+		Set<Contract> res = new HashSet<Contract>();
+		for (Contract contract : contracts) {
+			if (contract.getState().equals(ContractState.TERMINATED)) {
+				res.add(contract);
+			}
+		}
+		return res;
+	}
+
+	public Optional<Contract> getContractInForce() {
+		Optional<Contract> res = null;
+		for (Contract contract : contracts) {
+			if (contract.getState().equals(ContractState.IN_FORCE)) {
+				res = Optional.of(contract);
+			}
+		}
+		return res;
+	}
+
+	public boolean isInForce() {
+		if (getContractInForce() == null) {
+			return false;
+		}
+		return true;
 	}
 
 }

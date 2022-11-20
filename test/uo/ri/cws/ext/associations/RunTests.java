@@ -37,10 +37,8 @@
 //
 //	@Test
 //	public void testLinkOnRun() {
-//		assertTrue(contract	.getPayrolls()
-//							.contains(payroll));
-//		assertTrue(payroll	.getContract()
-//							.equals(contract));
+//		assertTrue(contract.getPayrolls().contains(payroll));
+//		assertTrue(payroll.getContract().equals(contract));
 //
 //	}
 //
@@ -50,8 +48,7 @@
 //		Associations.Run.unlink(payroll);
 //
 //		assertTrue(payroll.getContract() == null);
-//		assertFalse(contract.getPayrolls()
-//							.contains(payroll));
+//		assertFalse(contract.getPayrolls().contains(payroll));
 //
 //	}
 //
@@ -63,11 +60,9 @@
 //
 //		payrolls.remove(payroll);
 //
-//		assertTrue(contract	.getPayrolls()
-//							.size() == num);
+//		assertTrue(contract.getPayrolls().size() == num);
 //		assertTrue("It must be a copy of the collection or a read-only version",
-//				contract.getPayrolls()
-//						.contains(payroll));
+//				contract.getPayrolls().contains(payroll));
 //	}
 //
 //}

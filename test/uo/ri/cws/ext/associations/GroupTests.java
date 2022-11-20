@@ -15,63 +15,49 @@
 //import uo.ri.cws.domain.ProfessionalGroup;
 //
 //public class GroupTests {
-//    private Mechanic mechanic;
-//    private Contract contract;
-//    private ContractType type;
-//    private ProfessionalGroup group;
+//	private Mechanic mechanic;
+//	private Contract contract;
+//	private ContractType type;
+//	private ProfessionalGroup group;
 //
-//    @Before
-//    public void setUp() {
-//	mechanic = new Mechanic("dni", "nombre", "apellidos");
-//	type = new ContractType("type", 1.5);
-//	group = new ProfessionalGroup("group", 100.0, 10.0);
-//	double wage = 10000.0;
+//	@Before
+//	public void setUp() {
+//		mechanic = new Mechanic("dni", "nombre", "apellidos");
+//		type = new ContractType("type", 1.5);
+//		group = new ProfessionalGroup("group", 100.0, 10.0);
+//		double wage = 10000.0;
 //
-//	contract = new Contract(mechanic, type, group, wage);
+//		contract = new Contract(mechanic, type, group, wage);
 //
-//    }
+//	}
 //
-//    @Test
-//    public void testLinkOnRun() {
-//	assertTrue(contract
-//		.getProfessionalGroup()
-//		.equals(group));
-//	assertTrue(group
-//		.getContracts()
-//		.contains(contract));
-//    }
+//	@Test
+//	public void testLinkOnRun() {
+//		assertTrue(contract.getProfessionalGroup().equals(group));
+//		assertTrue(group.getContracts().contains(contract));
+//	}
 //
-//    @Test
-//    public void testUnlinkOnRun() {
+//	@Test
+//	public void testUnlinkOnRun() {
 //
-//	Associations.Group
-//		.unlink(contract, group);
+//		Associations.Group.unlink(contract, group);
 //
-//	assertTrue(contract
-//		.getProfessionalGroup() == null);
+//		assertTrue(contract.getProfessionalGroup() == null);
 //
-//	assertFalse(group
-//		.getContracts()
-//		.contains(contract));
+//		assertFalse(group.getContracts().contains(contract));
 //
-//    }
+//	}
 //
-//    @Test
-//    public void testSafeReturn() {
-//	Set<Contract> contracts = group
-//		.getContracts();
-//	int num = contracts
-//		.size();
+//	@Test
+//	public void testSafeReturn() {
+//		Set<Contract> contracts = group.getContracts();
+//		int num = contracts.size();
 //
-//	contracts
-//		.remove(contract);
+//		contracts.remove(contract);
 //
-//	assertTrue(group
-//		.getContracts()
-//		.size() == num);
-//	assertTrue("It must be a copy of the collection or a read-only version", group
-//		.getContracts()
-//		.contains(contract));
-//    }
+//		assertTrue(group.getContracts().size() == num);
+//		assertTrue("It must be a copy of the collection or a read-only version",
+//				group.getContracts().contains(contract));
+//	}
 //
 //}

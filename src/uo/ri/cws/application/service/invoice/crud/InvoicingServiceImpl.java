@@ -9,6 +9,8 @@ import uo.ri.cws.application.service.BusinessException;
 import uo.ri.cws.application.service.invoice.InvoicingService;
 import uo.ri.cws.application.service.invoice.crud.command.CreateInvoiceFor;
 import uo.ri.cws.application.service.invoice.crud.command.FindInvoice;
+import uo.ri.cws.application.service.invoice.crud.command.FindPayMeansByClientDni;
+import uo.ri.cws.application.service.invoice.crud.command.FindWorkOrdersByClientDni;
 import uo.ri.cws.application.util.command.CommandExecutor;
 
 public class InvoicingServiceImpl implements InvoicingService {
@@ -19,13 +21,13 @@ public class InvoicingServiceImpl implements InvoicingService {
 	public InvoiceDto createInvoiceFor(List<String> woIds)
 			throws BusinessException {
 
-		return executor.execute( new CreateInvoiceFor( woIds) );
+		return executor.execute(new CreateInvoiceFor(woIds));
 	}
 
 	@Override
 	public List<InvoicingWorkOrderDto> findWorkOrdersByClientDni(String dni)
 			throws BusinessException {
-		throw new RuntimeException("Not yet implemented");
+		return executor.execute(new FindWorkOrdersByClientDni(dni));
 	}
 
 	@Override
@@ -37,7 +39,7 @@ public class InvoicingServiceImpl implements InvoicingService {
 	@Override
 	public List<PaymentMeanDto> findPayMeansByClientDni(String dni)
 			throws BusinessException {
-		throw new RuntimeException("Not yet implemented");
+		return executor.execute(new FindPayMeansByClientDni(dni));
 	}
 
 	@Override

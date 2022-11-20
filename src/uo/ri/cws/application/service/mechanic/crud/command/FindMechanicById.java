@@ -8,13 +8,16 @@ import uo.ri.cws.application.service.BusinessException;
 import uo.ri.cws.application.service.mechanic.MechanicCrudService.MechanicDto;
 import uo.ri.cws.application.util.DtoAssembler;
 import uo.ri.cws.application.util.command.Command;
+import uo.ri.util.assertion.ArgumentChecks;
 
-public class FindMechanicById implements Command<Optional<MechanicDto>>{
+public class FindMechanicById implements Command<Optional<MechanicDto>> {
 
 	private String id;
 	private MechanicRepository repo = Factory.repository.forMechanic();
 
 	public FindMechanicById(String id) {
+		ArgumentChecks.isNotBlank(id,
+				"Blank id for searching Mechanics not valid");
 		this.id = id;
 	}
 

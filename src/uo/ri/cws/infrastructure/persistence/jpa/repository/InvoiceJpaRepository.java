@@ -19,8 +19,9 @@ public class InvoiceJpaRepository extends BaseJpaRepository<Invoice>
 
 	@Override
 	public Long getNextInvoiceNumber() {
-		// TODO Auto-generated method stub
-		return null;
+		return (long) Jpa.getManager()
+				.createNamedQuery("Invoice.getNextInvoiceNumber", Invoice.class)
+				.getMaxResults();
 	}
 
 }

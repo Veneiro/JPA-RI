@@ -24,7 +24,7 @@ public class AddMechanic implements Command<MechanicDto> {
 	public MechanicDto execute() throws BusinessException {
 		BusinessChecks.isTrue(repo.findByDni(dto.dni).isEmpty(),
 				"The mechanic already exists");
-		BusinessChecks.isNotEmpty(dto.name, "The name is empty");
+		BusinessChecks.isNotEmpty(dto.name.trim(), "The name is empty");
 		BusinessChecks.isNotEmpty(dto.surname, "The surname is empty");
 
 		Mechanic m = new Mechanic(dto.dni, dto.surname, dto.name);

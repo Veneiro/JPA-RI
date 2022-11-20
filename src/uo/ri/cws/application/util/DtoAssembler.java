@@ -8,9 +8,11 @@ import uo.ri.cws.application.service.client.ClientCrudService.ClientDto;
 import uo.ri.cws.application.service.invoice.InvoicingService.CardDto;
 import uo.ri.cws.application.service.invoice.InvoicingService.CashDto;
 import uo.ri.cws.application.service.invoice.InvoicingService.InvoiceDto;
+import uo.ri.cws.application.service.invoice.InvoicingService.InvoicingWorkOrderDto;
 import uo.ri.cws.application.service.invoice.InvoicingService.PaymentMeanDto;
 import uo.ri.cws.application.service.invoice.InvoicingService.VoucherDto;
 import uo.ri.cws.application.service.mechanic.MechanicCrudService.MechanicDto;
+import uo.ri.cws.application.service.professionalgroup.ProfessionalGroupService.ProfessionalGroupBLDto;
 import uo.ri.cws.application.service.vehicle.VehicleCrudService.VehicleDto;
 import uo.ri.cws.application.service.vehicleType.VehicleTypeCrudService.VehicleTypeDto;
 import uo.ri.cws.application.service.workorder.WorkOrderCrudService.WorkOrderDto;
@@ -20,6 +22,7 @@ import uo.ri.cws.domain.CreditCard;
 import uo.ri.cws.domain.Invoice;
 import uo.ri.cws.domain.Mechanic;
 import uo.ri.cws.domain.PaymentMean;
+import uo.ri.cws.domain.ProfessionalGroup;
 import uo.ri.cws.domain.Vehicle;
 import uo.ri.cws.domain.VehicleType;
 import uo.ri.cws.domain.Voucher;
@@ -28,22 +31,22 @@ import uo.ri.cws.domain.WorkOrder;
 public class DtoAssembler {
 
 	public static ClientDto toDto(Client c) {
-		 ClientDto dto = new ClientDto();
+		ClientDto dto = new ClientDto();
 
-		 dto.id = c.getId();
-		 dto.version = c.getVersion();
+		dto.id = c.getId();
+		dto.version = c.getVersion();
 
-		 dto.dni = c.getDni();
-		 dto.name = c.getName();
-		 dto.surname = c.getSurname();
+		dto.dni = c.getDni();
+		dto.name = c.getName();
+		dto.surname = c.getSurname();
 
-		 return dto;
+		return dto;
 	}
 
 	public static List<ClientDto> toClientDtoList(List<Client> clientes) {
 		List<ClientDto> res = new ArrayList<>();
-		for(Client c: clientes) {
-			res.add( DtoAssembler.toDto( c ) );
+		for (Client c : clientes) {
+			res.add(DtoAssembler.toDto(c));
 		}
 		return res;
 	}
@@ -61,16 +64,25 @@ public class DtoAssembler {
 
 	public static List<MechanicDto> toMechanicDtoList(List<Mechanic> list) {
 		List<MechanicDto> res = new ArrayList<>();
-		for(Mechanic m: list) {
-			res.add( toDto( m ) );
+		for (Mechanic m : list) {
+			res.add(toDto(m));
 		}
 		return res;
 	}
 
 	public static List<VoucherDto> toVoucherDtoList(List<Voucher> list) {
 		List<VoucherDto> res = new ArrayList<>();
-		for(Voucher b: list) {
-			res.add( toDto( b ) );
+		for (Voucher b : list) {
+			res.add(toDto(b));
+		}
+		return res;
+	}
+
+	public static List<ProfessionalGroupBLDto> toProfessionalGroupDtoList(
+			List<ProfessionalGroup> list) {
+		List<ProfessionalGroupBLDto> res = new ArrayList<>();
+		for (ProfessionalGroup pg : list) {
+			res.add(toDto(pg));
 		}
 		return res;
 	}
@@ -124,23 +136,19 @@ public class DtoAssembler {
 		return dto;
 	}
 
-	public static List<PaymentMeanDto> toPaymentMeanDtoList(List<PaymentMean> list) {
-		return list.stream()
-				.map( mp -> toDto( mp ) )
-				.collect( Collectors.toList() );
+	public static List<PaymentMeanDto> toPaymentMeanDtoList(
+			List<PaymentMean> list) {
+		return list.stream().map(mp -> toDto(mp)).collect(Collectors.toList());
 	}
 
 	private static PaymentMeanDto toDto(PaymentMean mp) {
 		if (mp instanceof Voucher) {
-			return toDto( (Voucher) mp );
-		}
-		else if (mp instanceof CreditCard) {
-			return toDto( (CreditCard) mp );
-		}
-		else if (mp instanceof Cash) {
-			return toDto( (Cash) mp);
-		}
-		else {
+			return toDto((Voucher) mp);
+		} else if (mp instanceof CreditCard) {
+			return toDto((CreditCard) mp);
+		} else if (mp instanceof Cash) {
+			return toDto((Cash) mp);
+		} else {
 			throw new RuntimeException("Unexpected type of payment mean");
 		}
 	}
@@ -161,6 +169,18 @@ public class DtoAssembler {
 		return dto;
 	}
 
+	public static InvoicingWorkOrderDto toInvoicingDto(WorkOrder a) {
+		InvoicingWorkOrderDto dto = new InvoicingWorkOrderDto();
+		dto.id = a.getId();
+
+		dto.description = a.getDescription();
+		dto.date = a.getDate().toLocalDate();
+		dto.total = a.getAmount();
+		dto.state = a.getState().toString();
+
+		return dto;
+	}
+
 	public static VehicleDto toDto(Vehicle v) {
 		VehicleDto dto = new VehicleDto();
 		dto.id = v.getId();
@@ -176,9 +196,13 @@ public class DtoAssembler {
 	}
 
 	public static List<WorkOrderDto> toWorkOrderDtoList(List<WorkOrder> list) {
-		return list.stream()
-				.map( a -> toDto( a ) )
-				.collect( Collectors.toList() );
+		return list.stream().map(a -> toDto(a)).collect(Collectors.toList());
+	}
+
+	public static List<InvoicingWorkOrderDto> toInvoicingWorkOrderDtoList(
+			List<WorkOrder> list) {
+		return list.stream().map(a -> toInvoicingDto(a))
+				.collect(Collectors.toList());
 	}
 
 	public static VehicleTypeDto toDto(VehicleType vt) {
@@ -195,9 +219,19 @@ public class DtoAssembler {
 
 	public static List<VehicleTypeDto> toVehicleTypeDtoList(
 			List<VehicleType> list) {
-		return list.stream()
-				.map( a -> toDto( a ) )
-				.collect( Collectors.toList() );
+		return list.stream().map(a -> toDto(a)).collect(Collectors.toList());
+	}
+
+	public static ProfessionalGroupBLDto toDto(ProfessionalGroup a) {
+		ProfessionalGroupBLDto dto = new ProfessionalGroupBLDto();
+		dto.id = a.getId();
+		dto.version = a.getVersion();
+
+		dto.name = a.getName();
+		dto.trieniumSalary = a.getTrieniumSalary();
+		dto.productivityRate = a.getProductivityRate();
+
+		return dto;
 	}
 
 }

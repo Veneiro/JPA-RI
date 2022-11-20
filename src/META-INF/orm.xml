@@ -44,6 +44,30 @@
 		<query>select max(f.number) + 1 from Invoice f</query>
 	</named-query>
 	
+	<named-query name="Invoice.finPayMeansByClientDni">
+		<query>
+			select p 
+			from PaymentMean p 
+			where p.client.id = ?1
+		</query>
+	</named-query>
+	
+	<named-query name="WorkOrder.findByClientDni">
+		<query>
+			select p 
+			from WorkOrder p 
+			where p.mechanic.id = ?1
+		</query>
+	</named-query>
+	
+	<!-- ProfessionalGroup queries -->
+	<named-query name="ProfessionalGroup.findByName">
+		<query>
+			select p
+			from ProfessionalGroup p
+			where p.name = ?1
+		</query>
+	</named-query>
 <!-- 
 	Use this format if your query has 
 	numeric comparisons as the one in this example

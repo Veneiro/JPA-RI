@@ -73,10 +73,11 @@ public class Associations {
 
 	public static class ToCharge {
 
-		public static void link(PaymentMean pm, Charge charge, Invoice invoice) {
+		public static void link(PaymentMean pm, Charge charge,
+				Invoice invoice) {
 			charge._setPaymentMean(pm);
 			charge._setInvoice(invoice);
-			
+
 			pm._getCharges().add(charge);
 			invoice._getCharges().add(charge);
 		}
@@ -112,15 +113,16 @@ public class Associations {
 				Mechanic mechanic) {
 			intervention._setMechanic(mechanic);
 			intervention._setWorkOrder(workOrder);
-			
+
 			workOrder._getInterventions().add(intervention);
 			mechanic._getInterventions().add(intervention);
 		}
 
 		public static void unlink(Intervention intervention) {
-			intervention.getWorkOrder()._getInterventions().remove(intervention);
+			intervention.getWorkOrder()._getInterventions()
+					.remove(intervention);
 			intervention.getMechanic()._getInterventions().remove(intervention);
-			
+
 			intervention._setMechanic(null);
 			intervention._setWorkOrder(null);
 		}
@@ -133,35 +135,49 @@ public class Associations {
 				Intervention intervention) {
 			sustitution._setIntervention(intervention);
 			sustitution._setSparePart(spare);
-			
+
 			spare._getSubstitutions().add(sustitution);
 			intervention._getSubstitutions().add(sustitution);
 		}
 
 		public static void unlink(Substitution sustitution) {
 			sustitution.getSparePart()._getSubstitutions().remove(sustitution);
-			sustitution.getIntervention()._getSubstitutions().remove(sustitution);
-			
+			sustitution.getIntervention()._getSubstitutions()
+					.remove(sustitution);
+
 			sustitution._setIntervention(null);
 			sustitution._setSparePart(null);
 		}
 
 	}
-	
-	public static class HireFire {
-		
-		public static void hire(Mechanic mechanic, Contract contract) {
-			contract._setMechanic(mechanic);
-			
+
+	public static class Fire {
+
+		public static void link(Contract contract) {
+			contract.setFiredMechanic(contract.getMechanic().get());
+			contract.setMechanic(null);
+		}
+
+		public static void unlink(Contract contract) {
+			contract.setMechanic(contract.getFiredMechanic().get());
+			contract.setFiredMechanic(null);
+		}
+
+	}
+
+	public static class Hire {
+
+		public static void link(Contract contract, Mechanic mechanic) {
+			contract.setMechanic(mechanic);
+
 			mechanic._getContracts().add(contract);
 		}
 
-		public static void fire(Mechanic mechanic, Contract contract) {
+		public static void unlink(Contract contract, Mechanic mechanic) {
 			mechanic._getContracts().remove(contract);
-			
-			contract._setMechanic(mechanic);
+
+			contract.setMechanic(null);
 		}
-		
 	}
 
 }

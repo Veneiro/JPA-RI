@@ -263,6 +263,10 @@ public class WorkOrder extends BaseEntity {
 		this.invoice = invoice;
 	}
 
+	public boolean isOpen() {
+		return state == WorkOrderState.OPEN;
+	}
+
 	public boolean isInvoiced() {
 		return state == WorkOrderState.INVOICED;
 	}
