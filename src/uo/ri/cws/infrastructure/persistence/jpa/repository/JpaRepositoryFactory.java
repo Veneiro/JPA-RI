@@ -5,6 +5,7 @@ import uo.ri.cws.application.repository.InterventionRepository;
 import uo.ri.cws.application.repository.InvoiceRepository;
 import uo.ri.cws.application.repository.MechanicRepository;
 import uo.ri.cws.application.repository.PaymentMeanRepository;
+import uo.ri.cws.application.repository.PayrollRepository;
 import uo.ri.cws.application.repository.ProfessionalGroupRepository;
 import uo.ri.cws.application.repository.RepositoryFactory;
 import uo.ri.cws.application.repository.SparePartRepository;
@@ -62,6 +63,11 @@ public class JpaRepositoryFactory implements RepositoryFactory {
 	@Override
 	public ProfessionalGroupRepository forProfessionalGroup() {
 		return new ProfessionalGroupJpaRepository();
+	}
+
+	@Override
+	public PayrollRepository forPayroll() {
+		return new PayrollJpaRepository();
 	}
 
 }

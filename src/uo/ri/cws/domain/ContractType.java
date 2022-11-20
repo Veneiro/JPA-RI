@@ -7,7 +7,7 @@ import javax.persistence.Table;
 import uo.ri.cws.domain.base.BaseEntity;
 
 @Entity
-@Table(name = "ContractTypes")
+@Table(name = "TContractTypes")
 public class ContractType extends BaseEntity {
 
 	@Column(unique = true)

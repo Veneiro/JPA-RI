@@ -19,70 +19,56 @@
 //
 //public class RunMappingTests {
 //
-//    private UnitOfWork unitOfWork;
-//    private EntityManagerFactory factory;
-//    private Mechanic mechanic;
-//    private Contract contract;
-//    private ContractType type;
-//    private ProfessionalGroup group;
-//    private Payroll payroll;
+//	private UnitOfWork unitOfWork;
+//	private EntityManagerFactory factory;
+//	private Mechanic mechanic;
+//	private Contract contract;
+//	private ContractType type;
+//	private ProfessionalGroup group;
+//	private Payroll payroll;
 //
-//    @Before
-//    public void setUp() {
-//	factory = Persistence
-//		.createEntityManagerFactory("carworkshop");
-//	unitOfWork = UnitOfWork
-//		.over(factory);
+//	@Before
+//	public void setUp() {
+//		factory = Persistence.createEntityManagerFactory("carworkshop");
+//		unitOfWork = UnitOfWork.over(factory);
 //
-//	mechanic = new Mechanic("mechanic-dni");
+//		mechanic = new Mechanic("mechanic-dni");
 //
-//	type = new ContractType("contract-type-name", 2.0);
-//	group = new ProfessionalGroup("professional-group-name", 300.0, 10.0);
-//	contract = new Contract(mechanic, type, group, 3000.0);
-//	payroll = new Payroll(contract);
+//		type = new ContractType("contract-type-name", 2.0);
+//		group = new ProfessionalGroup("professional-group-name", 300.0, 10.0);
+//		contract = new Contract(mechanic, type, group, 3000.0);
+//		payroll = new Payroll(contract);
 //
-//	unitOfWork
-//		.persist(payroll, contract, group, type, mechanic);
-//    }
+//		unitOfWork.persist(payroll, contract, group, type, mechanic);
+//	}
 //
-//    @After
-//    public void tearDown() {
-//	unitOfWork
-//		.remove(payroll, contract, group, type, mechanic);
-//	factory
-//		.close();
-//    }
+//	@After
+//	public void tearDown() {
+//		unitOfWork.remove(payroll, contract, group, type, mechanic);
+//		factory.close();
+//	}
 //
-//    /**
-//     * A contract recovers its payrolls
-//     */
-//    @Test
-//    public void testContractRecoversPayroll() {
+//	/**
+//	 * A contract recovers its payrolls
+//	 */
+//	@Test
+//	public void testContractRecoversPayroll() {
 //
-//	Contract restored = unitOfWork
-//		.findById(Contract.class, contract
-//			.getId());
+//		Contract restored = unitOfWork.findById(Contract.class,
+//				contract.getId());
 //
-//	assertTrue(restored
-//		.getPayrolls()
-//		.contains(payroll));
-//	assertEquals(1, restored
-//		.getPayrolls()
-//		.size());
-//    }
+//		assertTrue(restored.getPayrolls().contains(payroll));
+//		assertEquals(1, restored.getPayrolls().size());
+//	}
 //
-//    /**
-//     * A payroll recovers its contract
-//     */
-//    @Test
-//    public void testPayrollRecoversContractInForce() {
+//	/**
+//	 * A payroll recovers its contract
+//	 */
+//	@Test
+//	public void testPayrollRecoversContractInForce() {
 //
-//	Payroll restored = unitOfWork
-//		.findById(Payroll.class, payroll
-//			.getId());
+//		Payroll restored = unitOfWork.findById(Payroll.class, payroll.getId());
 //
-//	assertTrue(restored
-//		.getContract()
-//		.equals(contract));
-//    }
+//		assertTrue(restored.getContract().equals(contract));
+//	}
 //}

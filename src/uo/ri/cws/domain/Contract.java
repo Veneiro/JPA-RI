@@ -6,6 +6,9 @@ import java.util.Optional;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 import uo.ri.cws.domain.base.BaseEntity;
@@ -15,6 +18,9 @@ import uo.ri.cws.domain.base.BaseEntity;
 public class Contract extends BaseEntity {
 
 	private Mechanic mechanic;
+	private Mechanic firedMechanic;
+	@JoinColumn(name = "PROFESSIONALGROUP_ID")
+	private ProfessionalGroup pg;
 
 	@Basic(optional = false)
 	private LocalDate startDate;
@@ -27,10 +33,10 @@ public class Contract extends BaseEntity {
 
 	private double settlement;
 
+	@Enumerated(EnumType.STRING)
 	private ContractState state;
 
-	private Mechanic firedMechanic;
-
+	@JoinColumn(name = "CONTRACTTYPE_ID")
 	private ContractType type;
 
 	public enum ContractState {
@@ -43,6 +49,8 @@ public class Contract extends BaseEntity {
 	public Contract(Mechanic mechanic2, ContractType type,
 			ProfessionalGroup group, double wage) {
 		this.mechanic = mechanic2;
+		this.state = ContractState.IN_FORCE;
+		this.pg = group;
 	}
 
 	public Contract(Mechanic mechanic2, ContractType type,
@@ -51,6 +59,8 @@ public class Contract extends BaseEntity {
 		this.type = type;
 		this.annualWage = wage;
 		this.endDate = endDate2;
+		this.state = ContractState.IN_FORCE;
+		this.pg = group;
 	}
 
 	public void setMechanic(Mechanic optional) {
@@ -97,4 +107,11 @@ public class Contract extends BaseEntity {
 		return type;
 	}
 
+	public void terminate() {
+		this.state = ContractState.TERMINATED;
+	}
+
+	public ProfessionalGroup getProfessionalGroup() {
+		return this.pg;
+	}
 }

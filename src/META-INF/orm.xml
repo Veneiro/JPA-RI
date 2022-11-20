@@ -68,6 +68,16 @@
 			where p.name = ?1
 		</query>
 	</named-query>
+	
+	<!-- Payroll queries -->
+	
+	<!-- named-query name="Payroll.findByMechanicId">
+		<query>
+			select p
+			from Payrolls p
+			where p.mechanicId = ?1
+		</query>
+	</named-query>-->
 <!-- 
 	Use this format if your query has 
 	numeric comparisons as the one in this example

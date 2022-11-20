@@ -12,6 +12,8 @@ import uo.ri.cws.application.service.invoice.InvoicingService.InvoicingWorkOrder
 import uo.ri.cws.application.service.invoice.InvoicingService.PaymentMeanDto;
 import uo.ri.cws.application.service.invoice.InvoicingService.VoucherDto;
 import uo.ri.cws.application.service.mechanic.MechanicCrudService.MechanicDto;
+import uo.ri.cws.application.service.payroll.PayrollService.PayrollBLDto;
+import uo.ri.cws.application.service.payroll.PayrollService.PayrollSummaryBLDto;
 import uo.ri.cws.application.service.professionalgroup.ProfessionalGroupService.ProfessionalGroupBLDto;
 import uo.ri.cws.application.service.vehicle.VehicleCrudService.VehicleDto;
 import uo.ri.cws.application.service.vehicleType.VehicleTypeCrudService.VehicleTypeDto;
@@ -22,6 +24,7 @@ import uo.ri.cws.domain.CreditCard;
 import uo.ri.cws.domain.Invoice;
 import uo.ri.cws.domain.Mechanic;
 import uo.ri.cws.domain.PaymentMean;
+import uo.ri.cws.domain.Payroll;
 import uo.ri.cws.domain.ProfessionalGroup;
 import uo.ri.cws.domain.Vehicle;
 import uo.ri.cws.domain.VehicleType;
@@ -201,8 +204,10 @@ public class DtoAssembler {
 
 	public static List<InvoicingWorkOrderDto> toInvoicingWorkOrderDtoList(
 			List<WorkOrder> list) {
-		return list.stream().map(a -> toInvoicingDto(a))
-				.collect(Collectors.toList());
+		List<InvoicingWorkOrderDto> result = new ArrayList<InvoicingWorkOrderDto>();
+		for (WorkOrder w : list)
+			result.add(toInvoicingDto(w));
+		return result;
 	}
 
 	public static VehicleTypeDto toDto(VehicleType vt) {
@@ -229,8 +234,60 @@ public class DtoAssembler {
 
 		dto.name = a.getName();
 		dto.trieniumSalary = a.getTrieniumSalary();
-		dto.productivityRate = a.getProductivityRate();
+		dto.productivityRate = a.getProductivityBonusPercentage();
 
+		return dto;
+	}
+
+	public static List<PayrollSummaryBLDto> toPayrollDtoList(
+			List<Payroll> res) {
+		return res.stream().map(a -> toDto(a)).collect(Collectors.toList());
+	}
+
+	public static PayrollSummaryBLDto toDto(Payroll a) {
+		PayrollSummaryBLDto dto = new PayrollSummaryBLDto();
+		dto.id = a.getId();
+		dto.version = a.getVersion();
+
+		dto.date = a.getDate();
+		return dto;
+	}
+
+	public static PayrollBLDto toFullDto(Payroll a) {
+		PayrollBLDto dto = new PayrollBLDto();
+		dto.id = a.getId();
+		dto.version = a.getVersion();
+
+		dto.date = a.getDate();
+		dto.bonus = a.getBonus();
+		dto.contractId = a.getContractId();
+		dto.incomeTax = a.getIncomeTax();
+		dto.monthlyWage = a.getMonthlyWage();
+		dto.nic = a.getNIC();
+		dto.productivityBonus = a.getProductivityBonus();
+		dto.trienniumPayment = a.getTrienniumPayment();
+		return dto;
+	}
+
+	public static List<PayrollBLDto> toPayrollSummaryDtoList(
+			List<Payroll> res) {
+		return res.stream().map(a -> toDtoSummary(a))
+				.collect(Collectors.toList());
+	}
+
+	private static PayrollBLDto toDtoSummary(Payroll a) {
+		PayrollBLDto dto = new PayrollBLDto();
+		dto.id = a.getId();
+		dto.version = a.getVersion();
+
+		dto.bonus = a.getBonus();
+		dto.contractId = a.getContractId();
+		dto.date = a.getDate();
+		dto.incomeTax = a.getIncomeTax();
+		dto.monthlyWage = a.getMonthlyWage();
+		dto.nic = a.getNIC();
+		dto.productivityBonus = a.getProductivityBonus();
+		dto.trienniumPayment = a.getTrienniumPayment();
 		return dto;
 	}
 

@@ -1,4 +1,4 @@
-package uo.ri.cws.application.service.professionalgroup.crud.commands;
+package uo.ri.cws.application.service.professionalgroup.crud.command;
 
 import uo.ri.conf.Factory;
 import uo.ri.cws.application.repository.ProfessionalGroupRepository;

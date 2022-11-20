@@ -6,11 +6,11 @@ import java.util.Optional;
 import uo.ri.conf.Factory;
 import uo.ri.cws.application.service.BusinessException;
 import uo.ri.cws.application.service.professionalgroup.ProfessionalGroupService;
-import uo.ri.cws.application.service.professionalgroup.crud.commands.AddProfessionalGroup;
-import uo.ri.cws.application.service.professionalgroup.crud.commands.DeleteProfessionalGroup;
-import uo.ri.cws.application.service.professionalgroup.crud.commands.FindAllProfessionalGroups;
-import uo.ri.cws.application.service.professionalgroup.crud.commands.FindProfessionalGroupByName;
-import uo.ri.cws.application.service.professionalgroup.crud.commands.UpdateProfessionalGroup;
+import uo.ri.cws.application.service.professionalgroup.crud.command.AddProfessionalGroup;
+import uo.ri.cws.application.service.professionalgroup.crud.command.DeleteProfessionalGroup;
+import uo.ri.cws.application.service.professionalgroup.crud.command.FindAllProfessionalGroups;
+import uo.ri.cws.application.service.professionalgroup.crud.command.FindProfessionalGroupByName;
+import uo.ri.cws.application.service.professionalgroup.crud.command.UpdateProfessionalGroup;
 import uo.ri.cws.application.util.command.CommandExecutor;
 
 public class ProfessionalGroupServiceImpl implements ProfessionalGroupService {

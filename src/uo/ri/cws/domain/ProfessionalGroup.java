@@ -30,7 +30,7 @@ public class ProfessionalGroup extends BaseEntity {
 		return this.name;
 	}
 
-	public double getProductivityRate() {
+	public double getProductivityBonusPercentage() {
 		return this.productivityRate;
 	}
 
@@ -48,6 +48,10 @@ public class ProfessionalGroup extends BaseEntity {
 
 	public void setTrienniumSalary(double trienniumSalary) {
 		this.trienniumSalary = trienniumSalary;
+	}
+
+	public double getTrienniumPayment() {
+		return this.trienniumSalary;
 	}
 
 }

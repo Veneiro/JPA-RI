@@ -145,4 +145,14 @@ public class Mechanic extends BaseEntity {
 		return true;
 	}
 
+	public Set<Contract> getTerminatedContracts() {
+		Set<Contract> res = new HashSet<Contract>();
+		for (Contract contract : contracts) {
+			if (contract.getState().equals(ContractState.TERMINATED)) {
+				res.add(contract);
+			}
+		}
+		return res;
+	}
+
 }
