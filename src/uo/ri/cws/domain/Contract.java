@@ -1,6 +1,7 @@
 package uo.ri.cws.domain;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -16,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import uo.ri.cws.domain.base.BaseEntity;
+import uo.ri.util.assertion.ArgumentChecks;
 
 @Entity
 @Table(name = "TContracts")
@@ -60,13 +62,21 @@ public class Contract extends BaseEntity {
 		this.state = ContractState.IN_FORCE;
 		Associations.Group.link(this, group);
 		Associations.Type.link(this, type);
+		this.startDate = LocalDate.now();
+		this.endDate = startDate.plusYears(1);
 	}
 
 	public Contract(Mechanic mechanic2, ContractType type,
 			ProfessionalGroup group, LocalDate endDate2, double wage) {
+		ArgumentChecks.isNotNull(endDate2);
+		ArgumentChecks.isNotNull(mechanic2);
+		ArgumentChecks.isNotNull(group);
+		ArgumentChecks.isNotNull(type);
+		ArgumentChecks.isNotNull(wage);
 		Associations.Hire.link(this, mechanic2);
 		Associations.Type.link(this, type);
 		this.annualWage = wage;
+		this.startDate = LocalDate.now();
 		this.endDate = endDate2;
 		this.state = ContractState.IN_FORCE;
 		Associations.Group.link(this, group);
@@ -122,7 +132,20 @@ public class Contract extends BaseEntity {
 
 	public void terminate() {
 		this.state = ContractState.TERMINATED;
+		calculateSettlement();
 		Associations.Fire.link(this);
+		
+	}
+
+	private void calculateSettlement() {
+		double aux = 0.0;
+		for (Payroll payroll : payrolls) {
+			aux += payroll.getMonthlyWage();
+		}
+		aux = aux/365;
+		var p = Period.between(startDate, endDate);
+		double c = this.getContractType().getCompensationDays();
+		this.settlement = aux*c*(p.getYears());
 	}
 
 	public ProfessionalGroup getProfessionalGroup() {
